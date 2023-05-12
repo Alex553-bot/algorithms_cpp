@@ -23,6 +23,7 @@ using namespace std;
 ll __lcm(ll x,ll y) { return (x*y)/__gcd(x, y);}
 void no() {cout<<"no"<<endl;}
 void yes() {cout<<"yes"<<endl;}
+ll n;
 vl bit(N+1, 0);
 ll low_bit(ll x) {return x&(-x);}
 ll query(ll i) {
@@ -35,8 +36,15 @@ void update(ll i, ll x) {
 	while (i<=N) 
 		bit[i]+=x, i+=low_bit(i);
 }
+ll lowerbound(ll x) {
+	ll sum =0 , j = 0; 
+	fori(i, ll(log(n)/log(2)), -1)
+		if (j+(1<<i)<n && sum+v[j+(1<<i)]<x)
+			sum+=v[j+(1<<i)], j+=(1<<i);
+	return j;
+}
 void solve() {
-	ll n, q; cin>>n>>q; 
+	ll q; cin>>n>>q; 
 	fori(i, 0, n) {
 		ll x; cin>>x; 
 		update(i+1, x);
