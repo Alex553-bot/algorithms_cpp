@@ -22,37 +22,52 @@ const int mod = 998244353;
 const int N = 2e6+1;
 const int INF = 1e12;
 int n, m;
-int f(string &s, string &t, oset &ss) {
-	if (ss.size()==0) return 0;
-	auto ita = ss.lower_bound(s);
-	auto itb = ss.lower_bound(t);
-	int a = ita==ss.end()?ss.size(): ss.order_of_key(*ita);
-	int b = itb==ss.end()?ss.size(): ss.order_of_key(*itb);
-	if (b<a) return 0;
-	return b-a;
+vi bit(N+1, 0);
+map<int,int> index, inv;
+int gi(string &s) {
+	return mapa[stoll(s)];
+}
+int low_bit(int x) {return x&(-x);}
+int query(int i) {
+	int sum = 0; 
+	while (i) sum+=bit[i], i-=low_bit(i);
+	return sum;
+}
+void upd(int i, int x) {
+	while (i<N) bit[i]+=x, i+=low_bit(i);
+}
+int lower_bound(int i) {
+	int k =30, sum =0 , j = 0;
+	while (k--) 
+		if (j+(1<<k)<N && sum+bit[j+(1<<k)]<i) 
+			j+=(1<<k), sum+=bit[j];
+	return j+1;
 }
 void solve() {
-	int T, x, res; 
-	oset tre[2];
-	for (int i=0 ; i<2; i++) tre[i].clear();
-	while (true) {
-		cin>>T; 
-		if (!T) return;
-		string s, t; 
-		cin>>s;
-		if (T==1) {
-			cin>>x; x--;
-			tre[x].insert(s);
-		} else if (T==3) {
-			cin>>t>>x; res =0 ;
-			if (!x) 
-				for (int i=0 ; i<2; i++) 
-					res+=f(s, t, tre[i]);
-			else res = f(s, t, tre[x-1]);
-			cout<<res<<endl;	
-		} else 
-			for (int i= 0; i<2; i++) 
-				tre[i].erase(s);
+	vector<string> queries;
+	string s; 
+	set<int> ss;
+	while (cin>>s) {
+		cerr<<s<<endl;
+		if (s[0]!='#') {
+			int x = stoll(s);
+			ss.insert(x);
+		}
+		queries.pb(s);
+		cerr<<'b'<<endl;
+	}
+	int i = 1;
+	for (auto &x: ss) 
+		index[x]=i, inv[i] = x, i++;
+	cerr<<'a'<<endl;
+	for (string &s: queries) {
+		if (s[0]=='#') {
+			int q = query(N-1);
+			q = (q+1)/2;
+			cout<<inv[lower_bound(q)]<<endl;
+		} else {
+			upd(gi(s), 1);
+		}
 	}
 }
 signed main() {
