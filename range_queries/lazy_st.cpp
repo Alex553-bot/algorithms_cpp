@@ -19,6 +19,7 @@ void propagate(int i) {
     d[i] = 0;
 }
 void upd(int i, int lc, int rc, int l, int r, int x) {
+    if (d[i]) propagate(i);
     if (lc==l&&rc==r) {
         if (i>=k) apply(t[i], x), t[i>>1] = combine(t[i], t[i^1]);
         else apply(d[i], x);
