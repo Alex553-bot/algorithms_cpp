@@ -42,7 +42,9 @@ int query(int i, int lc, int rc, int l, int r) {
         int res = value;
         if (l<mid) res = combine(res, query(i<<1, lc, mid, l, min(mid, r)));
         if (r>=mid) res = combine(query(i<<1|1, mid, rc, max(l, mid), r), res);
-        return res;
+	propagate(i<<1), propagate(i<<1|1); 
+	t[i] = combine(t[i<<1], t[i<<1|1]); 
+	return res;
     }
 }
 void build() {
@@ -54,5 +56,7 @@ signed main() {
     k = 1; 
     while (k<=n) k<<=1;
     build();
+    // upd o query : 
+    // upd(1, 0, k, l, r, value);
     return 0;
 }
