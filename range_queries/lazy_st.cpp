@@ -1,34 +1,31 @@
 const int N = 1e5+1;
-const int value = 1e17; 
 vi d(4*N), t(4*N);
 int n, k; 
 int combine(int a, int b) {
     return a+b;
 }
-void apply(int &a, int b, int len, int piv) {
-    a+=b*len+piv*(len-1)*len/2;
+void apply(int &a, int b, int len) {
 }
 void propagate(int i, int len) {
     if (!d[i] || i>=2*k+n) return;
-    apply(t[i], d[i], len, f[i]);
+    apply(t[i], d[i], len);
     if ((i<<1)<2*k+n) {
-        d[i<<1]+=d[i], d[i<<1|1]+=d[i]+f[i]*len/2;
-        f[i<<1]+=f[i], f[i<<1|1]+=f[i];
+        d[i<<1]+=d[i], d[i<<1|1]+=d[i];
     }
-    d[i] = f[i] = 0;
+    d[i] = 0;
 }
 void upd(int i, int lc, int rc, int l, int r, int x) {
     if (l==r) return;
     propagate(i, rc-lc);
     if (lc==l&&rc==r) {
-        d[i]+=x;f[i]++; 
+        apply(d[i], x, rc-lc);
         propagate(i, rc-lc);
     } else {
         assert(lc!=rc-1);
         int mid = (lc+rc)>>1;
         if (l<mid) upd(i<<1, lc, mid, l, min(r, mid), x);
-        if (r>=mid) upd(i<<1|1, mid, rc, max(mid, l), r, x+mid-lc);
-        propagate(i<<1, mid), propagate(i<<1|1, mid);
+        if (r>=mid) upd(i<<1|1, mid, rc, max(mid, l), r, x);
+        propagate(i<<1, mid-lc), propagate(i<<1|1, mid-lc);
         t[i] = combine(t[i<<1], t[i<<1|1]);
     }
 }
