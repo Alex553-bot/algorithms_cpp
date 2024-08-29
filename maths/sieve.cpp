@@ -1,10 +1,5 @@
-#include <bits/stdc++.h>
-using namespace std;
-#define yes cout<<"YES\n"
-#define no cout<<"NO\n"
 using u64 = uint64_t;
 using u128 = __uint128_t;
-
 u64 binpower(u64 base, u64 e, u64 mod) {
     u64 result = 1;
     base %= mod;
@@ -16,7 +11,6 @@ u64 binpower(u64 base, u64 e, u64 mod) {
     }
     return result;
 }
-
 bool check_composite(u64 n, u64 a, u64 d, int s) {
     u64 x = binpower(a, d, n);
     if (x == 1 || x == n - 1)
@@ -28,7 +22,6 @@ bool check_composite(u64 n, u64 a, u64 d, int s) {
     }
     return true;
 };
-
 bool MillerRabin(u64 n, int iter=5) { // returns true if n is probably prime, else returns false.
     if (n < 4)
         return n == 2 || n == 3;
@@ -46,15 +39,4 @@ bool MillerRabin(u64 n, int iter=5) { // returns true if n is probably prime, el
             return false;
     }
     return true;
-}
-int main() {	
-	long long t, x;
-	// testcases:
-	cin>>t; int i;
-	while (t--) {
-		cin>>x;
-		if (MillerRabin(x)) yes;
-		else no;
-	}
-	return 0;
 }

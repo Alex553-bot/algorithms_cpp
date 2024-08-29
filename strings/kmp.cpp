@@ -1,7 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-#define int long long
-#define vi vector<int> 
 vi kmpp(string &s, int n) {
     vi dp(n, 0);
     int j= 0; 
@@ -21,7 +17,4 @@ vi kmp(string &t, string &p) {
         res.push_back(i-2*p.size()+1);
     }
     return res;
-}
-signed main() {
-    return 0;
 }

@@ -1,8 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-#define int long long 
-#define INF 1e18
-#define vi vector<int>
 signed main() {
     int n; 
     vector<vi> dp(n, vi(n, INF));

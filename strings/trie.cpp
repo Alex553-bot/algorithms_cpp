@@ -1,6 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std; 
-#define int long long
 const int MAXSIZE = 26;
 struct trie {
 	struct trie *child[MAXSIZE];
@@ -31,7 +28,4 @@ void insert(struct trie *root, string &s) {
 		proot = proot->child[ind];
 	}
 	proot->end = true;
-}
-signed main() {
-	return  0;
 }

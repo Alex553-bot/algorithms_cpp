@@ -1,6 +1,3 @@
-#include <bits/stdc++.h> 
-using namespace std; 
-#define int long long 
 struct pt {
 	int x, y; 
 };
@@ -32,7 +29,4 @@ void convexhull(vector<pt> &v, int inclu) {
 	}
 	v = st;
 	// devuelve los puntos sobre el mismo vector, en lado de reloj;
-}
-signed main() {
-	return 0;
 }

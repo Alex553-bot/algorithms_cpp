@@ -1,9 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std; 
-#define int long long 
-#define vi vector<int>
-#define N (int) 2e5
-#define pb push_back
 int n, q;
 vi grafo[N+1], tin(N+1, 0), tout(N+1, 0);
 vector<vi> dp(N+1, vi(32, -1));
@@ -46,7 +40,4 @@ void solve() {
 		}
 		cout<<lca(x, y)<<endl;
 	}
-}
-signed main() {
-    return 0;
 }

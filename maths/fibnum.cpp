@@ -1,21 +1,17 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long int ll;
-#define fori(i,ii,n) for (ll i = ii; i<n; i++)
 struct matrix {
-	ll matr[2][2];
+	int matr[2][2];
 	matrix friend operator *(const matrix &a, const matrix &b) {
 		matrix c; 
-		fori(i, 0, 2) 
-		fori(j, 0, 2) {
+		for (int i= 0 ; i<2; i++) 
+		for (int j = 0; j<2; j++) {
 			c.matr[i][j] = 0;
-			fori(k, 0, 2)
+			for (int k =0 ; k<2; k++) 
 				c.matr[i][j]+=a.matr[i][k]*b.matr[k][j];
 		}
 		return c;
 	}
 };
-matrix binpow(matrix a, ll n) {
+matrix binpow(matrix a, int n) {
 	matrix res{{
 		{1, 0},
 		{0, 1}
@@ -27,25 +23,19 @@ matrix binpow(matrix a, ll n) {
 	}
 	return res;
 }
-ll fast_algorithm(ll n) {
+int fast_algorithm(int n) {
 	matrix base{{
 		{1, 1},
 		{1, 0}
 	}};
 	return binpow(base, n).matr[0][1];
 }
-ll naive_algorithm(ll n) {
-	ll a = 0, b = 1;
-	fori(i, 0, n) {
-		ll aux = a+b;
+int naive_algorithm(int n) {
+	int a = 0, b = 1;
+	for (int i=0 ; i<n; i++) {
+		int aux = a+b;
 		a = b;
 		b = aux;
 	}
 	return a;
-}
-int main() {
-	ll n, m; cin>>n; m = n;
-	cout<<naive_algorithm(n)<<endl;
-	cout<<fast_algorithm(m)<<endl;
-	return 0;
 }

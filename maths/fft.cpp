@@ -1,8 +1,3 @@
-#include <bits/stdc++.h> 
-using namespace std;
-typedef complex<double> cd; 
-#define long long int 
-#define vi vector<int>
 double pi = acos(-1);
 void fft(vi &v, int rev) {
 	int n = v.size(); 

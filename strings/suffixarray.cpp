@@ -1,9 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std; 
-#define int long long
-#define vi vector<int> 
-#define S second
-#define F first
 vi sa, ra, lcp, t;
 int n;
 void buildsa(string &s) {
@@ -36,12 +30,4 @@ void buildLCP() {
 	}
 	lcp.resize(n); 
 	for (int i= 0; i<n; i++) lcp[i] = plcp[sa[i]];
-}
-signed main() {
-	string s; cin>>s;
-	s.push_back('$');
-	int n = s.size(); 
-	buildsa(s);
-	for (int i= 0; i<n; i++) cout<<sa[i]<<" \n"[i==n-1];
-	return 0;
 }

@@ -1,6 +1,3 @@
-#include <bits/stdc++.h> 
-using namespace std;
-#define N 2e5
 vl v(N+1, 0), rak(N+1, 1);
 vl graph[N+1];
 set<ll, cor> edges;

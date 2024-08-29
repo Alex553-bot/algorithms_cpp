@@ -1,8 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std; 
-#define vi vector<int>
-const int MOD = 1e9+7; 
-const int N = 1e6;
 const int primes[3] = {127, 229, 229};
 const int mod[3] = {MOD, 998244353, (1<<31)-1};
 vi pows[3], invs[3];

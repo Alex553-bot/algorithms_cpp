@@ -1,11 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std; 
-#define int long long 
-#define N 5e3
-#define INF 1e18
-#define F first 
-#define S second
-vector<int> grafo[N+1], v(N+1, 0), dis(N+1, INF);
+vi grafo[N+1], v(N+1, 0), dis(N+1, INF);
 signed main() {
     // realiza el grafo
     // para grafo con multiples destinos
@@ -37,5 +30,4 @@ signed main() {
     } else {
         // negative cycle 
     }
-    return 0;
 }
