@@ -1,13 +1,14 @@
 vi grafo[N], tin(N), low(N), vis(N); 
-set<pair<int,int>> s; 
+vi<pair<int,int>> s; 
 int timer, n, m, x;
 void bridge(int i, int j) {
     if (i>j) swap(i, j); 
-    s.insert({i, j});
+    s.pb({i, j});
 }
 int is_bridge(int i,int j) {
     if (i>j) swap(i, j); 
-    return s.count({i,j});
+    int k = lower_bound(s.begin(), s.end(), make_pair(i, j))-s.begin();
+    return k>=s.size() && s[k]!=make_pair(i, j);
 }
 void dfs(int v, int p = -1) {
     vis[v] = true;
@@ -30,8 +31,21 @@ void dfs(int v, int p = -1) {
 }
 void find_bridges() {
     timer = 0;
-    for (int i = 1; i <= n; ++i) {
-        if (!vis[i])
-            dfs(i);
+    for (int i = 1; i <= n; ++i) 
+        if (!vis[i]) dfs(i);
+}
+void init() {
+    // multiple paths between 2 nodes: (FAST)
+    vector<pair<int,int>> edges(m);
+    // cin with i<j to edges
+    sort(edges.begin(), edges.end());
+    find_bridges();
+    stack<pair<int,int>> st; 
+    for (; s.size(); s.pop_back()) st.push(s.back()); 
+    for (; st.size(); st.pop()) {
+        auto aaa = st.top();
+        int j = lower_bound(edges.begin(), edges.end(), aaa)-edges.end();
+        if (j+1 < edges.size() && edges[j]==edges[j+1]) continue;
+        s.pb(aaa);
     }
 }
