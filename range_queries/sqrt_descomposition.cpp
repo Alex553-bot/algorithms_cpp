@@ -1,21 +1,25 @@
-#include <bits/stdc++.h>
-using namespace std;
-#define N ll(1e4)
-typedef long long int ll;
-ll n = 0; 
-vector<ll> a, b;
-ll s;
-int main() {
-	cin>>n; 
-	a.resize(n, 0);
-	s = sqrt(n+.0)+1;
-	b.resize(s, 0);
-	for(ll i = 0; i<n; i++) cin>>a[i];
-	// preprocessing:
-	for(ll i = 0; i<n; i++) 
-		b[i/s]+=a[i];
-	// queries: 
-	while (m--) 
-
-	return 0;
+vi v, p;
+int block, n, q;
+int query(int i) {
+    if (i<0) return 0;
+    int res = 0;
+    for (int j = 0; j<i/block; j++) res+=p[j];
+    for (int j = (i/block)*block; j<=i; j++) res+=v[j]; 
+    return res;
+}
+void sqrt_() {
+    block = sqrt(n)+2;
+    v.resize(n, 0), p.resize(block, 0); 
+    for (int i =0 ; i<n;i++) p[i/block]+=v[i];
+    for (; q--; ) {
+        if (query) {
+            int l, r; cin>>l>>r; l--, r--;
+            cout<<query(r)-query(l-1)<<endl; // sum in range
+        } else {// point update
+            int i, x; cin>>i>>x; i--;
+            p[i/block]-=v[i];
+            v[i] = x;
+            p[i/block]+=v[i];
+        }
+    }
 }
