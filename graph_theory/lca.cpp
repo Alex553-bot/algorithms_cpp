@@ -12,11 +12,11 @@ void dfs(int i, int p) {
 	dfs(x, i);
 	tout[i] = timer++;
 }
-int low_bit(int x) {return x&(-x);}
 int is_ancestor(int i, int j) {
 	return tin[i]<tin[j] && tout[i]>tout[j];
 }
 int lca(int i, int j) {
+	// to append functions take in mind: fdp[i][k] = [i, p_k-1(i)) U [p_k-1(i), p_k(i)]
 	if (is_ancestor(i, j)) return i;
 	if (is_ancestor(j, i)) return j;
 	for (int k = l; k>-1; k--) 
@@ -26,18 +26,5 @@ int lca(int i, int j) {
 void solve() {
 	cin>>n>>q;
 	l = ceil(log2(n))+1;
-	for (int i = 2; i<n+1; i++) {
-		int x; cin>>x;
-		grafo[x].pb(i);
-	}
 	dfs(1, 1);
-	
-	while (q--) {
-		int x, y; cin>>x>>y;
-		if (x==y) {
-			cout<<x<<endl;
-			continue;
-		}
-		cout<<lca(x, y)<<endl;
-	}
 }
