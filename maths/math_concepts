@@ -26,4 +26,5 @@ Properties:
 	GCD(F_m, F_n) = F_gcd(m,n)
 5. 
 
-
+You have a grid to fill with tiles of 1x2 and 2x1 properties: 
+always possible if n%2 = 0 and think of a chess board (a tile always occupies 1 black and 1 white)
