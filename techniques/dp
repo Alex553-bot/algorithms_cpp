@@ -1,0 +1,8 @@
+sub array problems where the function is like this: 
+f(l, r) - k*(r-l+1)/m; there is an algorithm that works in O (n*m) using: 
+dp[i] = max/min over all len <= m: f(i-len+1, i) - k + dp[i-len] 
+because dp[i] we assume that puts a complete cycle interval (division) to apply -k * 1 (new cycle created. 
+
+
+check all submask from a mask efficiently: O(3^n):
+for (submask = 0; submask; submask = (submask&mask)-1)
