@@ -33,3 +33,12 @@ struct Hash{ // USO: init() [1 vez] y luego usar normal
         return fh(i, j, 0) + fh(i, j, 1) * 1000000000ll;
     }
 };
+// funcion para unir 2 hashes:
+// a = f(s), b = f(t); x = append(|s|, a, |t|, b) = f(s+t)
+int append(int ls, int hash1, int lp, int hash2) {
+    int a1 = hash1 % mods[0], a2 = hash1 / mods[0];
+    int b1 = hash2 % mods[0], b2 = hash2 / mods[0];
+    int h1 = (a1 + b1 * pows[0][ls] % mods[0]) % mods[0];
+    int h2 = (a2 + b2 * pows[1][ls] % mods[1]) % mods[1];
+    return h1 + h2 * mods[0];
+}
