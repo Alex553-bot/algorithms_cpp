@@ -9,5 +9,5 @@ struct DSU {
         p[a]+=p[b];
         p[b] = a;
     }
-    int siz(int x) {return p[find(x)];}
+    int siz(int x) {return -p[find(x)];}
 };

@@ -6,3 +6,7 @@ because dp[i] we assume that puts a complete cycle interval (division) to apply 
 
 check all submask from a mask efficiently: O(3^n):
 for (submask = 0; submask; submask = (submask&mask)-1)
+
+SOS dp (cuenta bien pero no se como)
+for (i = 0; i<n; i++) for (int mask = 0; mask < (1<<n); mask)
+if (mask & (1<<i)) dp[mask] += dp[mask ^ (1<<i)];
