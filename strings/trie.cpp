@@ -60,3 +60,49 @@ int get(int x, int i = 0, int j = 30) {
     if (!v[i].grafo[to] || !v[v[i].grafo[to]].c) return 0;
     return (to<<j) + get(x, v[i].grafo[to], j-1);
 }
+
+/* potente: */
+struct node;
+extern vector<node> trie;
+struct node {
+    int v[MAXSIZE];
+    int end;
+    node() {
+		for (int i =0 ; i<MAXSIZE; i++) v[i] = 0; end =0 ;
+	}
+    int go(char c) {return (!v[c-'a']? -1: v[c-'a']);}
+    void set(char c) {
+        v[c-'a'] = (int)trie.size();
+        trie.emplace_back(node());
+    }
+};
+vector<node> trie(1);
+
+void add(string &s, int j) {
+    int i = 0;
+    for (auto &c: s) {
+        if (trie[i].go(c) == -1) trie[i].set(c);
+        i = trie[i].go(c);
+    }
+    trie[i].ter = j;
+}
+vector<int> find (string &s) {
+    vector<int> res;
+
+    auto dfs = [&](int i, int j, auto &&dfs) {
+        if (j == s.size()) {
+            res.push_back(trie[i].ter);
+            return ;
+        }
+        int go = trie[i].go(s[j]);
+        if (go != -1) dfs(go, j+1, dfs);
+        if (s[j] != '_') {
+            go = trie[i].go();
+            if (go != -1) dfs(go, j+1, dfs);
+        }
+    };
+
+    dfs(0, 0, dfs);
+
+    return res;
+}

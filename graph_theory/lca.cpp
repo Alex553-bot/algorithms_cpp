@@ -1,7 +1,7 @@
 int n, q, timer = 0, l;
 vi grafo[N+1], tin(N+1, 0), tout(N+1, 0);
 vector<vi> dp;
-void dfs(int i = 1, int p = 1) {
+void dfs(int i = 1, int p = 1) { // must init in the same node (1, 1)
 	tin[i] = timer++;
 	dp[i][0] = p;
 	for (int j = 1; j<=l; j++) 
