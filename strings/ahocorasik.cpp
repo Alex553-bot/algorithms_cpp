@@ -1,12 +1,13 @@
-El trie (o prefix tree) guarda un diccionario de strings como un arbol enraizado.
-Aho corasick permite encontrar las ocurrencias de todos los strings del trie en un string s.
+// El trie (o prefix tree) guarda un diccionario de strings como un arbol enraizado.
+// Aho corasick permite encontrar las ocurrencias de todos los strings del trie en un string s.
 
 const int alpha = 26; // cantidad de letras del lenguaje
 const char L = 'a'; // primera letra del lenguaje
 
 struct node {
     int next[alpha], end;
-    // int link, exit, cnt; // para aho corasick
+    // link -> back-edge, exit -> super link, cnt -> saber para conteo de posibles
+    int link = 0, exit = 0, cnt; // para aho corasick
     int& operator [] (int i) { return next[i]; }
 };
 
