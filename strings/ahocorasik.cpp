@@ -7,6 +7,7 @@ const char L = 'a'; // primera letra del lenguaje
 struct node {
     int next[alpha], end;
     // link -> back-edge, exit -> super link, cnt -> saber para conteo de posibles
+    // a lo mucho es: n*sqrt(n)
     int link = 0, exit = 0, cnt; // para aho corasick
     int& operator [] (int i) { return next[i]; }
 };
