@@ -1,12 +1,16 @@
-// El trie (o prefix tree) guarda un diccionario de strings como un arbol enraizado.
-// Aho corasick permite encontrar las ocurrencias de todos los strings del trie en un string s.
+// El trie (o prefix tree) guarda un diccionario de 
+// strings como un arbol enraizado.
+// Aho corasick permite encontrar las ocurrencias 
+// de todos los strings del trie en un 
+// string s O(n*sqrt(n))
 
-const int alpha = 26; // cantidad de letras del lenguaje
-const char L = 'a'; // primera letra del lenguaje
+const int alpha = 26;
+const char L = 'a';
 
 struct node {
     int next[alpha], end;
-    // link -> back-edge, exit -> super link, cnt -> saber para conteo de posibles
+    // link -> back-edge, exit -> super link, 
+    // cnt -> saber para conteo de posibles
     // a lo mucho es: n*sqrt(n)
     int link = 0, exit = 0, cnt; // para aho corasick
     int& operator [] (int i) { return next[i]; }
@@ -39,13 +43,15 @@ void build_ac() {
             else q.push(v);
             if (!u || !v) continue;
             trie[v].link = trie[trie[u].link][c];
-            trie[v].exit = trie[trie[v].link].end ? trie[v].link : trie[trie[v].link].exit;
+            trie[v].exit = trie[trie[v].link].end ? 
+              trie[v].link : trie[trie[v].link].exit;
             trie[v].cnt += trie[trie[v].link].cnt;
         }
     }
 }
 
-vector<int> cnt; // cantidad de ocurrencias en s para cada patron
+// cantidad de ocurrencias en s para cada patron
+vector<int> cnt; 
 
 void run_ac(string &s) {
     int u = 0, sz = s.size();
