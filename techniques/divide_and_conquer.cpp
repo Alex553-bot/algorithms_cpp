@@ -23,3 +23,21 @@ void dc(vcor &v, int i, int j) {
 		dp[k] = bin(aux, v[k].y);
 	}
 }
+// use this option when the cut is not dividing the whole set:
+// optimization from n ** 2 -> n * log n  
+void dc(vector<int> &v, int i, int j) {
+	if (i > j) return;
+	if (i == j) return; 
+	int ll = i, rr = j;
+	while ( i <= j) {
+		if (check(i,ll,rr)) {
+			return dc(v,ll,i); // break instead of returning
+		}
+		if (check (j,ll,rr)) {
+			return dc(v,j,rr);
+		}
+		i++, j--;
+	}
+	// check how can u combine everything
+	return;
+}
